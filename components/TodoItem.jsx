@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     },
 });
 
-const Todos = ({ text }) => {
+const Todos = ({ text, id, onDelete, openModal }) => {
     const classes = useStyles();
     return (
         <Card className={classes.spacing}>
@@ -22,14 +22,18 @@ const Todos = ({ text }) => {
                 <Typography>{text}</Typography>
             </CardContent>
             <CardActions>
-                <Button size='small'>Edit</Button>
-                <Button size='small'>Delete</Button>
+                <Button onClick={() => openModal(id)} size='small'>
+                    Edit
+                </Button>
+                <Button onClick={() => onDelete(id)} size='small'>
+                    Delete
+                </Button>
             </CardActions>
         </Card>
     );
 };
 
-const GetTodoItems = () => {
+const GetTodoItems = ({ onDelete, openModal }) => {
     const { loading, error, data } = useQuery(GET_TODOS);
 
     if (loading) {
@@ -39,9 +43,13 @@ const GetTodoItems = () => {
         console.log(error.message.toString());
         return error.message.toString();
     } else if (data) {
-        console.log(data.todoItems);
         return data.todoItems.map((todoItemData) => (
-            <Todos key={todoItemData.id} {...todoItemData} />
+            <Todos
+                onDelete={onDelete}
+                openModal={openModal}
+                key={todoItemData.id}
+                {...todoItemData}
+            />
         ));
     }
 };
