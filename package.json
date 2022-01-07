@@ -9,9 +9,13 @@
     },
     "dependencies": {
         "@apollo/client": "^3.3.21",
+        "@emotion/react": "^11.7.1",
+        "@emotion/styled": "^11.6.0",
         "@material-ui/core": "^4.12.1",
+        "@mui/material": "^5.2.7",
         "@prisma/client": "^2.25.0",
         "apollo-server-micro": "2.25.1",
+        "apollo-upload-client": "^17.0.0",
         "graphql": "^15.2.0",
         "next": "11.0.0",
         "prisma": "^2.25.0",
